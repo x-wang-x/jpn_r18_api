@@ -4,3 +4,4 @@ teshtml.js
 xml.js
 node_modules/
 _javdb.js
+.env
