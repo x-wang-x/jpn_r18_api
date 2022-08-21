@@ -68,7 +68,8 @@ app.get('/get-cover/:key', async (req, res) => {
         res.send(data);
     }
     else{
-        res.status(404).send("Oh uh, something went wrong");
+        data = {status : "Error"}
+        res.send(data)
     }
     
     // console.log(data);
