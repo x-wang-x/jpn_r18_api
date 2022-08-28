@@ -3,7 +3,7 @@ var axios = require('axios');
 const cheerio = require('cheerio');
 const { html } = require('cheerio/lib/api/manipulation');
 const pretty = require("pretty");
-
+const https = require('https')
 withDNS(axios);
 
 async function search(id) {
@@ -29,20 +29,20 @@ async function search(id) {
     // };
     try {
         // let response = await axios(config);
-        let response = await axios.get(`https://jav.land/en/id_search.php?keys=${id}`, { dnsServer: '1.1.1.1' });
+        let response = await axios.get(`https://jav.land/en/id_search.php?keys=${id}`, { dnsServer: '1.1.1.1'});
         res = await response.data;
         const $ = cheerio.load(res);
         // console.log($.html())
         if($('body').text()=='error Too many connections'){
-            lis.status=404
+            lis.status="error"
             lis.reason="Too Many Connection"
         }
         else if($('body > div > div > div.k-right > div.container-fluid > div:nth-child(2) > div').text()=='Not Found!'){
-            lis.status=404
+            lis.status="error"
             lis.reason="Not Found"
         }
         else {
-            lis.status=200
+            lis.status="ok"
             const x = $('.videotextlist  > tbody > tr > td')
             $('#waterfall > a').each(function (n,e){
                 // console.log($(this).attr(`href`))
@@ -102,17 +102,17 @@ async function search(id) {
         }
     catch(e) {
         // console.log(e.code)
-        lis.status=404
-        lis.reason=e.code
+        lis.status='error'
+        throw e;
     }
     // console.log(lis)
-    return lis
-    // return JSON.stringify(lis);
+    // return lis
+    return JSON.stringify(lis);
 }
 
-( async() => {
-    let x = await search('jul-896')
-    console.log(x)
-})()
+// ( async() => {
+//     let x = await search('jul-896')
+//     console.log(x)
+// })()
 
 module.exports = {search};

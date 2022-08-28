@@ -108,7 +108,8 @@ async function search(id) {
         const $ = cheerio.load(res);
         // console.log($.html())
         if($('#rightcolumn > p > em').text()=='Search returned no result.'){
-            lis.status=404
+            lis.status='error';
+            lis.reason='No result.';
         }
         else if($('.videothumblist').length>0){
             // lis.status=404
@@ -118,7 +119,7 @@ async function search(id) {
             lis = JSON.parse(b)
         }
         else {
-            lis.status=200
+            lis.status='ok'
             const x = $('#rightcolumn')
             // console.log()
             
@@ -151,22 +152,27 @@ async function search(id) {
                     artist.push($(el).find('.star').text())
                 }
             })
+            
+            $(x).find('.previewthumbs').find('a').each(function (idx, el) {
+                lis.images.push($(el).attr('src'))
+            })
             lis.tags=genre
             lis.actor=artist
-            lis.images=[]
+            // lis.images=[]
             }
         }
     catch(e) {
-        console.log(e.reason)
-        lis.status=404
+        // console.log(e)
+        lis.status='error'
+        lis.reason=e
     }
     // console.log(lis)
-    return await lis;
+    return await JSON.stringify(lis);
 }
 
-( async() => {
-    let x = await search('meyd-255')
-    console.log(x)
-})()
+// ( async() => {
+//     let x = await search('ssis-133')
+//     console.log(x)
+// })()
 
 module.exports = {search};
