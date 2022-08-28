@@ -74,8 +74,26 @@ async function get(params) {
     }
     else {
         JSON.stringify(data)
-        if(data[0].code.toLowerCase()==params.toLowerCase())
-            return await details(data[0].id);
+        if(data[0].code.toLowerCase()==params.toLowerCase()){
+            data =  await details(data[0].id);
+            let actresses = []
+            let categori = []
+            data.data.actresses.forEach(element => {
+                actresses.push(element.name);
+            });
+            data.data.categories.forEach(element => {
+                categori.push(element.name);
+            });
+            let gallery = []
+                if (data.data.gallery!=null) { 
+                    for (let index = 0; index < data.data.gallery.length; index++) {
+                        gallery.push(data.data.gallery[index].large)
+                    }
+                }
+            return {
+                status : "ok",code : data.data.dvd_id, title : data.data.title , cover: data.data.images.jacket_image.large, release : data.data.release_date, maker: data.data.maker.name, genre: categori, artist : actresses,gallery: gallery
+            }
+        }
         else
             return null;
     }
@@ -90,25 +108,8 @@ function uncen(params) {
     }
     return params;
 }
-( async() => {
-    let data = await get('SSIS-371');
-    console.log(data)
-    // let actresses = []
-    // let categori = []
-    // let sample =  await data.data.sample.medium;
-    // data.data.actresses.forEach(element => {
-    //     actresses.push(element.name);
-    // });
-    // data.data.categories.forEach(element => {
-    //     categori.push(element.name);
-    // });
-    // let gallery = await data.data.gallery;
-    // //     if (gallery!=null) { 
-    // //         for (let index = 0; index < gallery.length; index++) {
-    // //             console.log(gallery[index].large)
-    // //         }
-    // //     }
-    // let size = 'medium';
-    // console.log(gallery[0][size])
-})()
+// ( async() => {
+//     let data = await get('SSIS-371');
+//     console.log(data)
+// })()
 module.exports = {details,search,get,uncen};

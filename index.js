@@ -12,7 +12,7 @@ app.get('/helloworld', (req, res) => {
   });
 app.get('/search/:key', async (req, res) => {
     console.log("Searching : "+req.params.key)
-    let data = await r18.search(req.params.key);
+    let data = await r18.get(req.params.key);
     res.send(data);
     console.log(data);
   });
