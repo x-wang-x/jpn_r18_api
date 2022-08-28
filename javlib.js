@@ -45,7 +45,7 @@ async function geturl(url){
             // console.log()
             lis.cover = $('#video_jacket_img').attr(`src`)
             lis.title = $(x).find(`#video_title`).find(`a`).text()
-            lis.dvd = $(x).find(`#video_id`).find(`.text`).text()
+            lis.code = $(x).find(`#video_id`).find(`.text`).text()
             lis.release = $(x).find(`#video_date`).find(`.text`).text()
             lis.maker = $(x).find(`.maker`).find(`a`).text()       
             $(x).find(`#video_genres`).find(`.genre`).each(function (idx, el) {

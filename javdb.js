@@ -79,7 +79,7 @@ async function details(id,dns=false) {
             let response = await axios(config);
             data = await response.data;
         }
-        lis.status=200;
+        lis.status="ok";
         const $ = cheerio.load(data);
 
         //this will get all of images / screenshot
@@ -165,7 +165,7 @@ async function details(id,dns=false) {
         }
     }
     catch(e) {
-        lis.status=404;
+        lis.status="error";
         console.log(e.code);
     }
     function compareAge(a, b) {
