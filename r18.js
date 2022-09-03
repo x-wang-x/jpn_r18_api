@@ -70,7 +70,7 @@ async function details(id) {
 async function get(params) {
     let data = await search(params);
     if (data.length==0) {
-        return null
+        return {status : 'error' , message:'Not Found'};
     }
     else {
         JSON.stringify(data)
@@ -95,7 +95,7 @@ async function get(params) {
             }
         }
         else
-            return null;
+            return {status : 'error' , message:'Cannot fetch data'};
     }
 }
 function uncen(params) {
