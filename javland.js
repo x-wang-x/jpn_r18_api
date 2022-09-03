@@ -30,6 +30,9 @@ async function search(id) {
     try {
         // let response = await axios(config);
         let response = await axios.get(`https://jav.land/en/id_search.php?keys=${id}`, { dnsServer: '1.1.1.1'});
+        // if(response.statusCode == 403){
+        //     return { status : error}
+        // }
         res = await response.data;
         const $ = cheerio.load(res);
         // console.log($.html())
@@ -101,9 +104,10 @@ async function search(id) {
             }
         }
     catch(e) {
-        // console.log(e.code)
+        // console.log(e.message)
         lis.status='error'
-        throw e;
+        lis.message=e.message
+        // throw e;
     }
     // console.log(lis)
     // return lis

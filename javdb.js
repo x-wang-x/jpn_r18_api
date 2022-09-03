@@ -159,7 +159,7 @@ async function details(id,dns=false) {
         if(lis.images.length==0){
             lis.images = null
         }
-        lis.trailer = $('#preview-video > source').attr(`src`)
+        lis.trailer = $('#preview-video > source').attr(`src`).replace('//','http://')
         if(lis.trailer==""){
             lis.trailer = null;
         }

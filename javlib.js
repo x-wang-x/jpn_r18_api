@@ -9,22 +9,6 @@ async function geturl(url){
     var artist=[]
     lis={}
     var genre=[]
-    // var config = {
-    // method: 'get',
-    // url: `${url}`,
-    // headers: { 
-    //     'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"', 
-    //     'sec-ch-ua-mobile': '?0', 
-    //     'sec-ch-ua-platform': '"Windows"', 
-    //     'Upgrade-Insecure-Requests': '1', 
-    //     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 
-    //     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9', 
-    //     'Sec-Fetch-Site': 'same-origin', 
-    //     'Sec-Fetch-Mode': 'navigate', 
-    //     'Sec-Fetch-User': '?1', 
-    //     'Sec-Fetch-Dest': 'document'
-    // },
-    // };
     try {
         let response = await axios.get(`${url}`, { dnsServer: '8.8.8.8' });
         res = await response.data;
@@ -85,22 +69,6 @@ async function search(id) {
     var artist=[]
     lis={}
     var genre=[]
-    // var config = {
-    // method: 'get',
-    // url: `https://www.javlibrary.com/en/vl_searchbyid.php?keyword=${id}`,
-    // headers: { 
-    //     'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"', 
-    //     'sec-ch-ua-mobile': '?0', 
-    //     'sec-ch-ua-platform': '"Windows"', 
-    //     'Upgrade-Insecure-Requests': '1', 
-    //     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 
-    //     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9', 
-    //     'Sec-Fetch-Site': 'same-origin', 
-    //     'Sec-Fetch-Mode': 'navigate', 
-    //     'Sec-Fetch-User': '?1', 
-    //     'Sec-Fetch-Dest': 'document'
-    // }
-    // };
     try {
         // let response = await axios(config);
         let response = await axios.get(`https://www.javlibrary.com/en/vl_searchbyid.php?keyword=${id}`, { dnsServer: '8.8.8.8' });
@@ -121,8 +89,6 @@ async function search(id) {
         else {
             lis.status='ok'
             const x = $('#rightcolumn')
-            // console.log()
-            
             lis.title = $(x).find(`#video_title`).find(`a`).text()
             lis.cover = $('#video_jacket_img').attr(`src`)
             lis.id = $(x).find(`#video_id`).find(`.text`).text()
