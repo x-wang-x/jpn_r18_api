@@ -1,8 +1,10 @@
 # jpn_r18_api
-
-This is unofficial rest-api for japanese adult movies database.
-
-
+<b>Currently not maintenanced</b> <br>
+Some might still work <br>
+<br>
+<br>
+This is unofficial rest-api for japanese adult movies database.<br>
+<br>
 How to use ??
 1. Clone this repo.
 2. Open folder.
